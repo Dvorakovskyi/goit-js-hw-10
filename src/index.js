@@ -17,7 +17,7 @@ const handleSearchCountries = event => {
   const searchCountry = event.target.value.trim();
 
   if (searchCountry === '') {
-    clearInfo();
+    cleanInfo();
   } else {
     restCountriesAPI
       .fetchCountries(searchCountry)
@@ -27,7 +27,7 @@ const handleSearchCountries = event => {
         } else if (data.length > 1 && data.length <= 10) {
           createCountryList(data);
         } else {
-          clearInfo();
+          cleanInfo();
 
           Notify.info(
             'Too many matches found. Please enter a more specific name.'
@@ -35,7 +35,7 @@ const handleSearchCountries = event => {
         }
       })
       .catch(() => {
-        clearInfo();
+        cleanInfo();
 
         Notify.failure('Oops, there is no country with that name');
       });
@@ -47,7 +47,7 @@ refs.input.addEventListener(
   debounce(handleSearchCountries, DEBOUNCE_DELAY)
 );
 
-const clearInfo = () => {
+const cleanInfo = () => {
   refs.contryList.innerHTML = '';
   refs.contryInfo.innerHTML = '';
 };
